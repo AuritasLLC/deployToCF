@@ -1,0 +1,31 @@
+name: 'Deploy to Cloud Foundry'
+description: 'Action for deploying apps to Cloud Foundry'
+inputs:
+  cf_api:
+    description: 'API endpoint for Cloud Foundry'
+    required: true
+  cf_username:
+    description: 'Username for Cloud Foundry authentication'
+    required: true
+  cf_password:
+    description: 'Password for Cloud Foundry authentication'
+    required: true
+  cf_org:
+    description: 'Organization in Cloud Foundry'
+    required: true
+  cf_space:
+    description: 'Space in Cloud Foundry'
+    required: true
+  command:
+    description: 'Command to execute on Cloud Foundry'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.cf_api }}
+    - ${{ inputs.cf_username }}
+    - ${{ inputs.cf_password }}
+    - ${{ inputs.cf_org }}
+    - ${{ inputs.cf_space }}
+    - ${{ inputs.command }}
